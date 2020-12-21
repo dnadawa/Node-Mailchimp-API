@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const request = require('request');
 const https = require('https');
-const keys = require('./keys');
+// const keys = require('./keys');
 
 const app = express();
 app.use(bodyParser.urlencoded({extended: true}));
@@ -32,11 +32,11 @@ app.post("/", function (req, res) {
 
     const jsonData = JSON.stringify(data);
 
-    const url = "https://us17.api.mailchimp.com/3.0/lists/"+keys.LIST_ID;
+    const url = "https://us17.api.mailchimp.com/3.0/lists/"+process.env.LIST_ID;
 
     const options = {
         method: "POST",
-        auth: "Dulaj:"+keys.API_KEY
+        auth: "Dulaj:"+process.env.API_KEY
     }
 
     const request = https.request(url, options, function (response) {
